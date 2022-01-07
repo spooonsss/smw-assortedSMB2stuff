@@ -6,7 +6,7 @@ db $42
 
 JMP MarioBelow : JMP MarioAbove : JMP MarioSide : JMP SpriteV : JMP SpriteH : JMP MarioCape : JMP MarioFireBall : JMP RETURN2 : JMP RETURN2 : JMP RETURN2
 
-!SPRITENUMBER = $00	;sprite # to generate (Birdo Egg)
+!SPRITENUMBER = $42	;sprite # to generate (Birdo Egg)
 !ISCUSTOM = $01		;set to 01 to generate custom or 00 for standard
 
 !XDISP = $FFF6		;value added to block position on generation
@@ -35,6 +35,7 @@ else
 endif
 	LDA #!SPRITENUMBER	;sprite to generate
 	%spawn_sprite()
+	BCS RETURN2
 	TAX
 	LDA #$0B
 	STA $14C8,x
