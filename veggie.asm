@@ -61,7 +61,7 @@ SPRITE_CODE_START:   JSR SPRITE_GRAPHICS       ; graphics routine
                     BNE RETURN              ; /
 
                     STZ $AA,x
-                    JSL $01802A             ; update position based on speed values
+                    JSL $01802A|!bank             ; update position based on speed values
          
                     LDA $1588,x             ; \ if sprite is in contact with an object...
                     AND #$03                ;  |
@@ -70,7 +70,7 @@ SPRITE_CODE_START:   JSR SPRITE_GRAPHICS       ; graphics routine
                     EOR #$01                ;  |
                     STA $157C,x             ; /
 NO_CONTACT:          
-                    JSL $01A7DC             ; check for mario/sprite contact (carry set = contact)
+                    JSL $01A7DC|!bank             ; check for mario/sprite contact (carry set = contact)
                     BCC RETURN_24           ; return if no contact
                     %SubVertPos()        ; 
                     LDA $0E                 ; \ if mario isn't above sprite, and there's vertical contact...
@@ -118,17 +118,17 @@ SPRITE_WINS:        LDA $154C,x             ; \ if riding sprite...
                     BNE RETURN_24           ; /   ...return
                     LDA $1490               ; \ if mario star timer > 0, goto HAS_STAR 
                     BNE HAS_STAR            ; / NOTE: branch to RETURN_24 to disable star killing                  
-                    JSL $00F5B7             ; hurt mario
+                    JSL $00F5B7|!bank             ; hurt mario
 RETURN_24:          RTS                     ; final return
 
 SPIN_KILL:          JSR SUB_STOMP_PTS       ; give mario points
-                    JSL $01AA33             ; set mario speed, NOTE: remove call to not bounce off sprite
-                    JSL $01AB99             ; display contact graphic
+                    JSL $01AA33|!bank             ; set mario speed, NOTE: remove call to not bounce off sprite
+                    JSL $01AB99|!bank             ; display contact graphic
                     LDA #$04                ; \ status = 4 (being killed by spin jump)
                     STA $14C8,x             ; /   
                     LDA #$1F                ; \ set spin jump animation timer
                     STA $1540,x             ; /
-                    JSL $07FC3B             ; show star animation
+                    JSL $07FC3B|!bank             ; show star animation
                     LDA #$08                ; \ play sound effect
                     STA $1DF9               ; /
                     RTS                     ; return
@@ -145,7 +145,7 @@ HAS_STAR:           LDA #$02                ; \ status = 2 (being killed by star
                     BCC NO_RESET2           ;  |
                     LDA #$08                ;  |
                     STA $18D2               ; /   
-NO_RESET2:          JSL $02ACE5             ; give mario points
+NO_RESET2:          JSL $02ACE5|!bank             ; give mario points
                     LDY $18D2               ; \ 
                     CPY #$08                ;  | if consecutive enemies stomped < 8 ...
                     BCS NO_SOUND2           ;  |
@@ -229,7 +229,7 @@ NO_SOUND:            TYA                     ; \
                     CMP #$08                ;  | if consecutive enemies stomped >= 8, reset to 8
                     BCC NO_RESET            ;  |
                     LDA #$08                ; /
-NO_RESET:            JSL $02ACE5             ; give mario points
+NO_RESET:            JSL $02ACE5|!bank             ; give mario points
                     PLY                     ;
                     RTS                     ; return
                 

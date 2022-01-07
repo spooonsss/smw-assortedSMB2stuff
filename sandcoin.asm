@@ -24,7 +24,7 @@ STA $1DF9
 
 	LDA #$06	;erase self
 	STA $9C
-	JSL $00BEB0	;generate blank block
+	JSL $00BEB0|!bank	;generate blank block
 %create_smoke()	;make smoke
 RETURN2:
 RTL

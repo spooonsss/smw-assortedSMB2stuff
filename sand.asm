@@ -21,7 +21,7 @@ STA $1DF9
 
 	LDA #$02	;Generate
 	STA $9C		;A
-	JSL $00BEB0	;blank block
+	JSL $00BEB0|!bank	;blank block
 	%create_smoke()	;make smoke (er...sand)
 RETURN2:
 RTL

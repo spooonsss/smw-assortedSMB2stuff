@@ -57,7 +57,7 @@ KILL:
 	lda #$28			;shake ground
 	STA $1887
 
-        jsl $00FA80		;kill sprites, turn to coins
+        jsl $00FA80|!bank		;kill sprites, turn to coins
         LDA #$16                ; \ Play sound effect
         STA $1DFC               ; / 
 		LDA #$02		; \ make sprite

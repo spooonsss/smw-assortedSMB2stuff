@@ -56,7 +56,7 @@ endif
 	STA $14D4,x
 	LDA #$02	;erase self
 	STA $9C
-	JSL $00BEB0	;generate blank block
+	JSL $00BEB0|!bank	;generate blank block
 
 PLY
 
