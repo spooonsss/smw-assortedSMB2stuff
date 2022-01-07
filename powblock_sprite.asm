@@ -7,6 +7,8 @@
 ; NOTE: use this sprite in conjunction w/ the SMB pow 2 block
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+!tile_no = $A0
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; INIT and MAIN JSL targets
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -71,34 +73,22 @@ RETURN:		RTS
 ; GRAPHICS ROUTINE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; TILEMAP:            db $82,$82
-TILEMAP:            db $A0,$A0
 
 SUB_GFX:    %GetDrawInfo()       ; sets y = OAM offset
-        ; FIXME: what bug is this supposed to fix
-		; LDA #$F0		; \ kill that annoying tile used
-		; STA $0309,y		; / for original shell tilemaps
+        ; Undo the tile set at 19f27 (we are running original sprite code when status=carried)
+		LDA #$F0		; \ kill that annoying tile used
+		STA $0309,y		; / for original shell tilemaps
                     LDA $157C,x             ; \ $02 = direction
                     STA $02                 ; / 
-                    LDA $14                 ; \ 
-                    LSR A                   ;  |
-                    LSR A                   ;  |
-                    LSR A                   ;  |
-                    CLC                     ;  |
-                    ADC $15E9               ;  |
-                    AND #$01                ;  |
-                    STA $03                 ;  | $03 = index to frame start (0 or 1)
-                    PHX                     ; /
                     
                     LDA $14C8,x
                     CMP #$02
-                    BNE LOOP_START_2
-                    STZ $03
+                    BNE STORE_OAM
                     LDA $15F6,x
                     ORA #$80
                     STA $15F6,x
 
-LOOP_START_2:       LDA $00                 ; \ tile x position = sprite x location ($00)
+STORE_OAM:       LDA $00                 ; \ tile x position = sprite x location ($00)
                     STA $0300,y             ; /
 
                     LDA $01                 ; \ tile y position = sprite y location ($01)
@@ -112,16 +102,9 @@ LOOP_START_2:       LDA $00                 ; \ tile x position = sprite x locat
 NO_FLIP:            ORA $64                 ; add in tile priority of level
                     STA $0303,y             ; store tile properties
 
-                    LDX $03                 ; \ store tile
-                    LDA TILEMAP,x           ;  |
+                    LDA #!tile_no           ; \
                     STA $0302,y             ; /
 
-                    ; INY                     ; \ increase index to sprite tile map ($300)...
-                    ; INY                     ;  |    ...we wrote 1 16x16 tile...
-                    ; INY                     ;  |    ...sprite OAM is 8x8...
-                    ; INY                     ; /    ...so increment 4 times
-
-                    PLX                     ; pull, X = sprite index
                     LDY #$02                ; \ 460 = 2 (all 16x16 tiles)
                     LDA #$00                ;  | A = (number of tiles drawn - 1)
                     %FinishOAMWrite()       ; / don't draw if offscreen
