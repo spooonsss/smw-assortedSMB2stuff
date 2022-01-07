@@ -1,0 +1,44 @@
+Random SMB 2 Stuff. By ICB. Version 4.
+
+Fixes in Version 4:
+-Fixed a major bug where the game would crash if you tried to pick up a veggie, bomb, or POW block and there were no free sprite slots available.
+
+Fixes in Version 3:
+-Fixed the problem with both sand blocks generating coins. I accidentally saved the coin sand as regular sand. oops!
+-Fixed the problem with the cape making the sand block freeze the rom.
+-Fixed the problem with the cape powerup not letting you pick veggies unless ducking. Still working on 
+	the same issue with fire Mario. 
+-Added a SFX file for a more accurate digging sound to be inserted with Romi's new addmusic.
+
+NOTE: All blocks for BTSD! I will not make them for old blocktool as this would require offsets and I don't feel
+like messing with offsets. Seriously, make a backup of your rom, and try BTSD. It's so much better.
+
+Included in this package:
+
+BLOCKS: (MAKE ALL OF THEM ACT LIKE 25)
+sand.asm - A block that acts like the diggable sand from SMB 2. Press Y or X to dig. It is solid on top
+	but you can walk through the sides.
+
+sandcoin.asm - Just like the sand block, except it hides a coin!
+
+bombplant.asm - The planted Bob-omb from SMB 2. Press X or Y to pluck it from the ground. It 
+	has a short fuse, but if you kick it, it will reset.
+
+veggieplant.asm - A planted Vegetable that you can pluck out of the ground and throw at enemies.
+	Requires the Veggie sprite (Change the sprite number accordingly in the asm file).
+
+powblock.asm - A block that Mario can pick up, which turns into the pow block from SMB 2.
+
+SPRITES:
+veggie.asm and veggie.cfg - This is the throwable vegetable for the veggie plant block.
+powblock_sprite.asm and powblock_sprite.cfg - This throwable block kills all enemies on screen and turns them into coins.
+	Use with powblock.asm block.
+
+EXGFX:
+-smb2sprites.bin - (sp4) The SMB2 sprites ExGFX file with Pow Block, veggies and Bob-omb.
+-smb2exanim_plus_sand.bin - Exanimation for Pow Block (Pal 2), plant (pal 4) and sand (not for Exanimation. Move
+	this one to your FG bin file and use custom palette.)
+
+SFX:
+dig.txt is a sound effect to be installed with Romi's new addmusic. Put it in the folder for 1DFC or 1DF9, and set it in 
+	sound effects .ini file, then change the sound in the block asm accordingly.
