@@ -30,6 +30,7 @@ else
 endif
 	LDA #!SPRITENUMBER	;sprite to generate
 	%spawn_sprite()
+	BCS RETURN2
 	TAX
 	LDA #$0B
 	STA $14C8,x
