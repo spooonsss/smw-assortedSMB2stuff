@@ -1,16 +1,14 @@
-;; Sand Block. By ICB. Make act like Block 25
+;; Sand Block. By ICB. Make act like Block 100
 
 db $42
 
 JMP MarioBelow : JMP MarioAbove : JMP MarioSide : JMP SpriteV : JMP SpriteH : JMP MarioCape : JMP MarioFireBall : JMP RETURN2 : JMP RETURN2 : JMP RETURN2
 
 MarioAbove:
-	LDY #$01	;act like tile 130
-	LDA #$30	;If standing on top
-	STA $1693
 LDA $16			;If button
 AND #$40		;Y or X isn't pressed
 BEQ RETURN2		;return
+TRB $16 ; un-press Y or X, so we don't shoot a fireball
 LDA #$E4		;Move Mario up
 STA $7D			;for a second
 STZ $7B			;Zero horz speed
@@ -27,9 +25,6 @@ RETURN2:
 RTL
 
 SpriteV:
-	LDY #$01	;act like tile 130
-	LDA #$30	;to sprites
-	STA $1693	;that are walking on top
 MarioSide:
 MarioBelow:
 SpriteH:

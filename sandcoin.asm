@@ -1,19 +1,14 @@
 db $42
-JMP MarioBelow : JMP MarioAbove : JMP MarioSide : JMP SpriteV : JMP SpriteH : JMP MarioCape : JMP MarioFireBall : JMP Return_l : JMP Return_l : JMP Return_l
+JMP MarioBelow : JMP MarioAbove : JMP MarioSide : JMP SpriteV : JMP SpriteH : JMP MarioCape : JMP MarioFireBall : JMP RETURN2 : JMP RETURN2 : JMP RETURN2
 
 !XDISP = $FFF6		;value added to block position on generation
 !YDISP = $0000
 
-Return_l:
-	RTL
-
 MarioAbove:
-	LDY #$01	;act like tile 130
-	LDA #$30
-	STA $1693
 LDA $16
 AND #$40
 BEQ RETURN2
+TRB $16 ; un-press Y or X, so we don't shoot a fireball
 LDA #$E4
 STA $7D
 STZ $7B
@@ -30,9 +25,6 @@ RETURN2:
 RTL
 
 SpriteV:
-	LDY #$01	;act like tile 130
-	LDA #$30
-	STA $1693
 MarioSide:
 MarioBelow:
 MarioCape:

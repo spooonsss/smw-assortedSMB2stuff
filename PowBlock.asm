@@ -1,4 +1,4 @@
-;PowBLock, based off of smkdan's Sprite Gen block. By ICB. Act Like Block 130 and Exanimate with 
+;PowBLock, based off of smkdan's Sprite Gen block. By ICB. Act Like Block 130 or 25 and Exanimate with 
 ; appropriate pow GFX.
 ; Point the sprite number to the Pow in your sprites list, and change it's GFX to look like the
 ; SMB 2 Pow
@@ -13,9 +13,6 @@ JMP MarioBelow : JMP MarioAbove : JMP MarioSide : JMP SpriteV : JMP SpriteH : JM
 !XDISP = $FFF6		;value added to block position on generation
 !YDISP = $0000
 
-Return_l:
-	PLY
-	RTL
 MarioAbove:
 MarioBelow:
 

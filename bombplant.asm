@@ -8,9 +8,6 @@ JMP MarioBelow : JMP MarioAbove : JMP MarioSide : JMP SpriteV : JMP SpriteH : JM
 !XDISP = $FFF6		;value added to block position on generation
 !YDISP = $0000
 
-Return_l:
-	PLY
-	RTL
 MarioAbove:
 MarioBelow:
 

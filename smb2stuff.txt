@@ -15,19 +15,19 @@ like messing with offsets. Seriously, make a backup of your rom, and try BTSD. I
 
 Included in this package:
 
-BLOCKS: (MAKE ALL OF THEM ACT LIKE 25)
+BLOCKS:
 sand.asm - A block that acts like the diggable sand from SMB 2. Press Y or X to dig. It is solid on top
-	but you can walk through the sides.
+	but you can walk through the sides. Set "Act as": 100
 
-sandcoin.asm - Just like the sand block, except it hides a coin!
+sandcoin.asm - Just like the sand block, except it hides a coin! Set "Act as": 100
 
 bombplant.asm - The planted Bob-omb from SMB 2. Press X or Y to pluck it from the ground. It 
-	has a short fuse, but if you kick it, it will reset.
+	has a short fuse, but if you kick it, it will reset. Set "Act as": 25
 
 veggieplant.asm - A planted Vegetable that you can pluck out of the ground and throw at enemies.
-	Requires the Veggie sprite (Change the sprite number accordingly in the asm file).
+	Requires the Veggie sprite (Change the sprite number accordingly in the asm file). Set "Act as": 25
 
-powblock.asm - A block that Mario can pick up, which turns into the pow block from SMB 2.
+powblock.asm - A block that Mario can pick up, which turns into the pow block from SMB 2. Set "Act as": 130 or 25
 
 SPRITES:
 veggie.asm and veggie.cfg - This is the throwable vegetable for the veggie plant block.
