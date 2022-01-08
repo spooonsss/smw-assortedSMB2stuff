@@ -5,7 +5,9 @@
 
 db $42
 
-JMP MarioBelow : JMP MarioAbove : JMP MarioSide : JMP SpriteV : JMP SpriteH : JMP MarioCape : JMP MarioFireBall : JMP RETURN2 : JMP RETURN2 : JMP RETURN2
+JMP MarioBelow : JMP MarioAbove : JMP MarioSide
+JMP SpriteV : JMP SpriteH : JMP MarioCape : JMP MarioFireBall
+JMP TopCorner : JMP BodyInside : JMP HeadInside
 
 !SPRITENUMBER = $43	;sprite # to generate (Pow)
 !ISCUSTOM = $01		;set to 01 to generate custom or 00 for standard
@@ -15,10 +17,15 @@ JMP MarioBelow : JMP MarioAbove : JMP MarioSide : JMP SpriteV : JMP SpriteH : JM
 
 MarioAbove:
 MarioBelow:
+BodyInside:
 
+LDA $1470 ; carrying something already
+ORA $187A ; on Yoshi
+BNE RETURN2
 LDA $16
 AND #$40
 BEQ RETURN2
+TRB $16 ; un-press Y or X, so we don't shoot a fireball
 PHY
 LDA #$08
 STA $1498
@@ -66,6 +73,8 @@ MarioCape:
 SpriteV:
 SpriteH:
 MarioFireBall:
+TopCorner:
+HeadInside:
 	RTL
 
 print "A Pow, which will destroy all sprites currently active."
