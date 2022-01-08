@@ -1,4 +1,4 @@
-Random SMB 2 Stuff. By ICB. Version 4.
+Random SMB 2 Stuff. By ICB, modifications by spooonsss.
 
 Fixes in Version 4:
 -Fixed a major bug where the game would crash if you tried to pick up a veggie, bomb, or POW block and there were no free sprite slots available.
@@ -10,8 +10,7 @@ Fixes in Version 3:
 	the same issue with fire Mario. 
 -Added a SFX file for a more accurate digging sound to be inserted with Romi's new addmusic.
 
-NOTE: All blocks for BTSD! I will not make them for old blocktool as this would require offsets and I don't feel
-like messing with offsets. Seriously, make a backup of your rom, and try BTSD. It's so much better.
+NOTE: Blocks tested with GPS.
 
 Included in this package:
 
